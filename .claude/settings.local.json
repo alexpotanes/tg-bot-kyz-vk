@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm outdated:*)",
+      "Bash(npm audit:*)",
+      "Bash(git log:*)",
+      "Bash(test:*)",
+      "Bash(npm install:*)",
+      "Bash(cat:*)",
+      "Bash(node --check:*)",
+      "Bash(npm update:*)",
+      "Bash(npm test:*)",
+      "Read(//d/tg-bot/tg-bot-react/src/components/**)",
+      "Read(//d/tg-bot/tg-bot-react/src/hooks/**)",
+      "Bash(gh auth:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

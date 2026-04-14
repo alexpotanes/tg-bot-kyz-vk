@@ -1,0 +1,23 @@
+[dotenv@17.2.4] injecting env (8) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+🚀 Инициализация сервисов...
+✅ Google Sheets подключен: ии бот
+✅ Все сервисы инициализированы
+✅ Express-сервер запущен на порту 3000
+   POST /webapp-data      — данные из веб-калькулятора
+   POST /payment/webhook  — уведомления от ЮKassa
+✅ VK бот запущен (Long Poll)
+[UPDATE] dialog_flags {"peer_id":285943537,"flags":2}
+[UPDATE] dialog_flags {"peer_id":285943537,"flags":2}
+[UPDATE] message {"message":{"id":370,"conversation_message_id":55,"peer_id":285943537,"date":1774901750,"update_time
+[checkSubscription] userId=285943537, group_id=65432676
+[checkSubscription] isMember result=1
+[UPDATE] messages_read {"peer_id":285943537,"local_id":55}
+[UPDATE] dialog_flags {"peer_id":285943537,"flags":2}
+[UPDATE] message {"message":{"id":371,"conversation_message_id":56,"peer_id":285943537,"date":1774901751,"update_time
+[UPDATE] messages_read {"peer_id":285943537,"local_id":56}
+[UPDATE] dialog_flags {"peer_id":285943537,"flags":2}
+[UPDATE] message {"message":{"id":372,"conversation_message_id":57,"peer_id":285943537,"date":1774901753,"update_time
+[UPDATE] messages_read {"peer_id":285943537,"local_id":57}
+[UPDATE] dialog_flags {"peer_id":285943537,"flags":2}
+[UPDATE] message {"message":{"id":373,"conversation_message_id":58,"peer_id":285943537,"date":1774901753,"update_time
+[UPDATE] messages_read {"peer_id":285943537,"local_id":58}
