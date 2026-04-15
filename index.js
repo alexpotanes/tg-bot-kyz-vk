@@ -136,6 +136,9 @@ vk.updates.on('message_new', async (ctx) => {
         await handleCallbackQuery(vk, ctx);
         return;
     }
+
+    // Любое другое сообщение — показать стартовый экран
+    await handleStart(vk, ctx);
 });
 
 /**
