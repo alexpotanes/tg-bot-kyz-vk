@@ -195,14 +195,13 @@ async function start() {
 // Graceful shutdown
 process.on('SIGINT', () => {
     console.log('\n🛑 Остановка бота...');
-    // vk.updates.stopPolling() останавливает Long Poll
-    vk.updates.stopPolling();
+    vk.updates.stop();
     process.exit(0);
 });
 
 process.on('SIGTERM', () => {
     console.log('\n🛑 Остановка бота...');
-    vk.updates.stopPolling();
+    vk.updates.stop();
     process.exit(0);
 });
 
