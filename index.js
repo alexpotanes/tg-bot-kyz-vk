@@ -155,7 +155,7 @@ vk.updates.on('message_event', async (ctx) => {
  */
 vk.updates.on('app_payload', async (ctx) => {
     const userId = ctx.userId;
-    console.log('[app_payload] userId:', userId, 'payload:', JSON.stringify(ctx.payload).slice(0, 200));
+    console.log('[app_payload] userId:', userId, 'payload:', JSON.stringify(ctx.eventPayload).slice(0, 200));
 
     if (!rateLimiter.checkLimit(String(userId))) {
         console.warn(`Rate limit exceeded for user ${userId} (app_payload)`);
@@ -163,11 +163,7 @@ vk.updates.on('app_payload', async (ctx) => {
     }
 
     try {
-        const orderData = typeof ctx.payload === 'string'
-            ? JSON.parse(ctx.payload)
-            : ctx.payload;
-
-        await handleWebAppData(vk, userId, orderData);
+        await handleWebAppData(vk, userId, ctx.eventPayload);
     } catch (error) {
         console.error('Ошибка обработки app_payload:', error);
     }
