@@ -150,6 +150,30 @@ vk.updates.on('message_event', async (ctx) => {
 });
 
 /**
+ * Обработчик данных из VK Mini App (VKWebAppSendPayload)
+ * Срабатывает когда форма-калькулятор отправляет данные через vk-bridge
+ */
+vk.updates.on('app_payload', async (ctx) => {
+    const userId = ctx.userId;
+    console.log('[app_payload] userId:', userId, 'payload:', JSON.stringify(ctx.payload).slice(0, 200));
+
+    if (!rateLimiter.checkLimit(String(userId))) {
+        console.warn(`Rate limit exceeded for user ${userId} (app_payload)`);
+        return;
+    }
+
+    try {
+        const orderData = typeof ctx.payload === 'string'
+            ? JSON.parse(ctx.payload)
+            : ctx.payload;
+
+        await handleWebAppData(vk, userId, orderData);
+    } catch (error) {
+        console.error('Ошибка обработки app_payload:', error);
+    }
+});
+
+/**
  * Обработчик ошибок Long Poll
  */
 vk.updates.on('error', (error) => {
