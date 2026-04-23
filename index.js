@@ -107,32 +107,30 @@ vk.updates.use((ctx, next) => {
 });
 
 vk.updates.on('message_new', async (ctx) => {
+    // Пропускаем исходящие сообщения бота — VK возвращает их обратно в Long Poll,
+    // что создаёт бесконечную петлю ответов
+    if (ctx.isOutbox) return;
+
     const userId = String(ctx.senderId);
 
     // Проверка rate limiting
     if (!rateLimiter.checkLimit(userId)) {
         console.warn(`Rate limit exceeded for user ${userId}`);
-        await ctx.send('⏱ Слишком много запросов. Пожалуйста, подождите немного.');
         return;
     }
 
-    // В VK нет команды /start — бот запускается первым сообщением или
-    // по нажатию кнопки "Начать" (payload: {"command": "start"})
     const payload = ctx.messagePayload;
     const isStartCommand =
         ctx.text?.toLowerCase() === 'start' ||
-        ctx.text === '/start' ||                          // на случай если пользователь введёт /start
-        payload?.command === 'start' ||
-        !ctx.text;                                        // первое сообщение без текста
+        ctx.text === '/start' ||
+        payload?.command === 'start';
 
     if (isStartCommand) {
         await handleStart(vk, ctx);
         return;
     }
 
-    // Обработка нажатий текстовых кнопок с payload
-    const btnPayload = ctx.messagePayload;
-    if (btnPayload?.cmd === 'deposit') {
+    if (payload?.cmd === 'deposit') {
         await handleCallbackQuery(vk, ctx);
         return;
     }
@@ -147,6 +145,7 @@ vk.updates.on('message_new', async (ctx) => {
  */
 vk.updates.on('message_event', async (ctx) => {
     console.log('[message_event] peerId:', ctx.peerId, 'payload:', JSON.stringify(ctx.eventPayload));
+    await ctx.answer();
     await handleCallbackQuery(vk, ctx);
 });
 
