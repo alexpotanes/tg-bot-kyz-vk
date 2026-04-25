@@ -1,8 +1,7 @@
 import axios from 'axios';
+import { Keyboard } from 'vk-io';
 import { config } from '../config/env.js';
 import { calculatePrice } from './priceCalculator.js';
-// Утилита вынесена в отдельный модуль чтобы избежать циклической зависимости
-// paymentService → webAppDataHandler → paymentService
 import { sendVkMessage } from '../utils/vkHelper.js';
 
 /**
@@ -136,7 +135,10 @@ export class PaymentService {
             throw new Error(`ЮKassa не вернула ссылку на оплату. Статус: ${payment.status}`);
         }
 
-        // Отправляем пользователю ссылку на оплату
+        const paymentKeyboard = Keyboard.builder()
+            .urlButton({ label: '💳 Перейти к оплате', url: paymentUrl })
+            .inline();
+
         await sendVkMessage(
             vk,
             peerId,
@@ -144,7 +146,8 @@ export class PaymentService {
             `• Артикулов: ${articles}\n` +
             `• Фото на артикул: ${photo}\n` +
             `• Итого: ${price} ₽\n\n` +
-            `Для оплаты перейдите по ссылке:\n${paymentUrl}`
+            `Нажмите кнопку ниже для оплаты:`,
+            { keyboard: paymentKeyboard.toString() }
         );
     }
 

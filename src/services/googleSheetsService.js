@@ -66,11 +66,6 @@ export class GoogleSheetsService {
         const price = calculatePrice(articles, photo);
 
         try {
-            // Загружаем заголовки и строки для корректного определения места добавления
-            await this.sheet.loadHeaderRow();
-            await this.sheet.getRows(); // Загружаем строки, чтобы addRow знал, где конец таблицы
-
-            // Добавляем новую строку в конец таблицы с опцией insert: true
             await this.sheet.addRow({
                 "Отметка времени": new Date().toISOString(),
                 "ID ТЗ": chatId,
