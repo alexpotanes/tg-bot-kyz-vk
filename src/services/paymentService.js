@@ -96,7 +96,7 @@ export class PaymentService {
                     },
                     items: [
                         {
-                            description: 'Контент-генерация (артикулы и фото)',
+                            description: 'Услуга фотосъёмки, ИИ',
                             quantity: 1,
                             amount: {
                                 value: price.toFixed(2),
