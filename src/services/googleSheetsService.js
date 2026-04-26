@@ -66,8 +66,17 @@ export class GoogleSheetsService {
         const price = calculatePrice(articles, photo);
 
         try {
+            const now = new Date();
+            const msk = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+            const hh = String(msk.getUTCHours()).padStart(2, '0');
+            const mm = String(msk.getUTCMinutes()).padStart(2, '0');
+            const dd = String(msk.getUTCDate()).padStart(2, '0');
+            const mo = String(msk.getUTCMonth() + 1).padStart(2, '0');
+            const yyyy = msk.getUTCFullYear();
+            const timestamp = `${hh}:${mm} | ${dd}.${mo}.${yyyy}`;
+
             await this.sheet.addRow({
-                "Отметка времени": new Date().toISOString(),
+                "Отметка времени": timestamp,
                 "ID ТЗ": chatId,
                 "ФИО": name,
                 "TgUsername": username,
