@@ -56,7 +56,10 @@ export async function handleWebAppData(vk, peerId, rawData) {
 
     } catch (error) {
         console.error('Ошибка обработки данных формы:', error);
-        await sendVkMessage(vk, peerId, '❌ Произошла ошибка при обработке заказа. Пожалуйста, попробуйте ещё раз.');
+        // Пробуем уведомить пользователя в VK, но не даём этой ошибке скрыть основную
+        sendVkMessage(vk, peerId, '❌ Произошла ошибка при обработке заказа. Пожалуйста, попробуйте ещё раз.')
+            .catch(e => console.error('Не удалось отправить сообщение об ошибке пользователю:', e.message));
+        throw error;
     }
 }
 
