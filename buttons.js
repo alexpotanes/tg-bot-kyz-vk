@@ -22,8 +22,7 @@ export const buttonsStart = Keyboard.builder()
     })
     .urlButton({
         label: 'Оформить подписку и начать',
-        // TODO: заменить на актуальную ссылку оформления подписки в VK
-        url: 'https://vk.com/stone_production',
+        url: 'https://vk.com/ai_for_seller?analytics_screen=group&levelId=2506&source=donut_banner&w=donut_payment-237223290',
     })
     .inline();
 
