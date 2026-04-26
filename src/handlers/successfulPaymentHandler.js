@@ -55,7 +55,7 @@ export async function handleSuccessfulPayment(vk, paymentObject) {
             vk,
             peerId,
             '✅ Оплата прошла успешно! Ваш заказ принят.\n\nПо кнопке ниже можете подсчитать стоимость, заполнить ТЗ, а затем оплатить услугу',
-            { keyboard: buttonsSub.toString() }
+            { keyboard: buttonsSub }
         );
 
     } catch (error) {
